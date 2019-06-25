@@ -70,11 +70,20 @@
           this.$refs['dataForm'].clearValidate()
         })
       },
+      successCallback(msg) {
+        this.dialog = false
+        this.$notify({
+          title: 'Success',
+          message: msg,
+          type: 'success',
+          duration: 2000
+        })
+      },
       createData() {
-
+        this.$emit('create-data', this.form, this.successCallback)
       },
       updateData() {
-
+        this.$emit('update-data', this.form, this.successCallback)
       }
     }
   }

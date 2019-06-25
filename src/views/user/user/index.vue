@@ -45,7 +45,7 @@
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             编辑
           </el-button>
-          <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(row,'deleted')">
+          <el-button size="mini" type="danger">
             删除
           </el-button>
         </template>
@@ -57,6 +57,7 @@
 
     <user-form-dialog
             ref="userFormDialog"
+            @create-data="createData"
     ></user-form-dialog>
     <table-dialog title="账号列表" :head="accountListHead" ref="accountListDialog"></table-dialog>
     <table-dialog title="角色列表" :head="roleListHead" ref="roleListDialog"></table-dialog>
@@ -127,51 +128,19 @@
       handleCreate() {
         this.$refs.userFormDialog.open('create')
       },
-      createData() {
-        this.$refs['dataForm'].validate((valid) => {
-          if (valid) {
-            this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
-            this.temp.author = 'vue-element-admin'
-            createUser(this.temp).then(() => {
-              this.list.unshift(this.temp)
-              this.dialogFormVisible = false
-              this.$notify({
-                title: 'Success',
-                message: 'Created Successfully',
-                type: 'success',
-                duration: 2000
-              })
-            })
-          }
+      createData(data, callback) {
+        createUser(data).then(() => {
+          callback("创建用户成功")
         })
       },
       handleUpdate(row) {
         this.$refs.userFormDialog.open('edit', row)
       },
-      // updateData() {
-      //   this.$refs['dataForm'].validate((valid) => {
-      //     if (valid) {
-      //       const tempData = Object.assign({}, this.temp)
-      //       tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-      //       updateUser(tempData).then(() => {
-      //         for (const v of this.list) {
-      //           if (v.id === this.temp.id) {
-      //             const index = this.list.indexOf(v)
-      //             this.list.splice(index, 1, this.temp)
-      //             break
-      //           }
-      //         }
-      //         this.dialogFormVisible = false
-      //         this.$notify({
-      //           title: 'Success',
-      //           message: 'Update Successfully',
-      //           type: 'success',
-      //           duration: 2000
-      //         })
-      //       })
-      //     }
-      //   })
-      // },
+      updateData(data, callback) {
+        updateUser(data).then(() => {
+          callback("修改用户成功")
+        })
+      },
       // handleDelete(row) {
       //   this.$notify({
       //     title: 'Success',
