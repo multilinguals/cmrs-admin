@@ -45,10 +45,10 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { realName, avatar } = data
+        const { realName } = data
 
         commit('SET_NAME', realName)
-        commit('SET_AVATAR', avatar)
+        commit('SET_AVATAR', "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
         resolve(data)
       }).catch(error => {
         reject(error)
