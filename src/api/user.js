@@ -28,3 +28,19 @@ export function getUsers() {
     method: 'get'
   })
 }
+
+export function createUser(data) {
+  return request({
+    url: '/admin/create-user',
+    method: 'post',
+    data
+  })
+}
+
+export function updateUser(data) {
+  return request({
+    url: '/admin/create-user',
+    method: 'put',
+    data
+  })
+}

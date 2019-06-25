@@ -58,15 +58,15 @@ export const constantRoutes = [
   {
     path: '/user',
     component: Layout,
-    redirect: '/user/administrator',
+    redirect: '/user/index',
     name: 'User',
     meta: { title: '系统用户', icon: 'meeting_fill' },
     children: [
       {
-        path: 'administrator',
-        name: 'Administrator',
-        component: () => import('@/views/user/administrator/index'),
-        meta: { title: '管理员管理', icon: 'people_fill' }
+        path: 'index',
+        name: 'User',
+        component: () => import('@/views/user/user/index'),
+        meta: { title: '用户管理', icon: 'people_fill' }
       },
       {
         path: 'role',
