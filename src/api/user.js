@@ -22,10 +22,11 @@ export function logout() {
   })
 }
 
-export function getUsers() {
+export function getUsers(params) {
   return request({
     url: '/admin/get-user-list',
-    method: 'get'
+    method: 'get',
+    params
   })
 }
 
