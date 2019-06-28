@@ -13,7 +13,7 @@
       <el-form-item label="角色" prop="role" >
         <el-select v-model="form.role" multiple placeholder="请选择">
           <el-option
-                  v-for="item in ruleOptions"
+                  v-for="item in roleOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -25,7 +25,11 @@
       <el-button @click="dialog = false">
         取消
       </el-button>
-      <el-button type="primary" @click="dialogStatus==='create' ? createData() : updateData()">
+      <el-button
+              type="primary"
+              @click="dialogStatus==='create' ? createData() : updateData()"
+              :loading="btnLoading"
+      >
         确认
       </el-button>
     </div>
@@ -43,14 +47,21 @@
           create: '创建用户'
         },
         dialog: false,
+        btnLoading: false,
         form: {
           username: '',
           realName: '',
           password: '',
           role: []
         },
-        rules: {},
-        ruleOptions: [
+        rules: {
+          username: [
+            {
+              required: true, message: '请输入用户名', trigger: 'blur'
+            }
+          ]
+        },
+        roleOptions: [
           { value: 'Test1', label: 'Test1'},
           { value: 'Test2', label: 'Test2'},
           { value: 'Test3', label: 'Test3'}
@@ -59,18 +70,19 @@
     },
     methods: {
       open(status, data) {
+        this.btnLoading = false
         this.dialog = true
         this.dialogStatus = status
 
-        if(data) {
-          this.form = Object.assign({}, data)
-        }
-
         this.$nextTick(() => {
-          this.$refs['dataForm'].clearValidate()
+          this.$refs['dataForm'].resetFields()
+          if(data) {
+            this.form = Object.assign({}, data)
+          }
         })
       },
       successCallback(msg) {
+        this.btnLoading = false
         this.dialog = false
         this.$notify({
           title: 'Success',
@@ -80,10 +92,27 @@
         })
       },
       createData() {
-        this.$emit('create-data', this.form, this.successCallback)
+        this.formSubmit().then(() => {
+          this.$emit('create-data', this.form, this.successCallback)
+        })
       },
       updateData() {
-        this.$emit('update-data', this.form, this.successCallback)
+        this.formSubmit().then(() => {
+          this.$emit('update-data', this.form, this.successCallback)
+        })
+      },
+      formSubmit() {
+        return new Promise((resolve, reject) => {
+          this.$refs['dataForm'].validate((valid) => {
+            if (valid) {
+              this.btnLoading = true
+              resolve()
+            } else {
+              reject()
+              return false
+            }
+          })
+        })
       }
     }
   }

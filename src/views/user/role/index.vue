@@ -60,7 +60,6 @@
 
 <script>
   import {getRoles, createRole, updateRole} from '@/api/role'
-  import waves from '@/directive/waves' // waves directive
   import Pagination from '@/components/Pagination' // secondary package based on el-pagination
   import TableDialog from '@/components/Dialog/TableDialog'
   // import UserFormDialog from './UserFormDialog'
@@ -71,7 +70,6 @@
       Pagination,
       TableDialog
     },
-    directives: {waves},
     filters: {},
     data() {
       return {

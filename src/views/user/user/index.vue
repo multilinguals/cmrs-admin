@@ -6,8 +6,14 @@
       <!--<el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">-->
         <!--搜索-->
       <!--</el-button>-->
-      <el-button class="filter-item" style="float: right;" type="primary" icon="el-icon-plus"
-                 @click="handleCreate">
+      <el-button
+              class="filter-item"
+              style="float: right;"
+              type="primary"
+              icon="el-icon-plus"
+              @click="handleCreate"
+              size="medium"
+      >
         添加用户
       </el-button>
     </div>
@@ -66,8 +72,6 @@
 
 <script>
   import {getUsers, createUser, updateUser} from '@/api/user'
-  import waves from '@/directive/waves' // waves directive
-  import {parseTime} from '@/utils'
   import Pagination from '@/components/Pagination' // secondary package based on el-pagination
   import TableDialog from '@/components/Dialog/TableDialog'
   import UserFormDialog from './UserFormDialog'
@@ -79,7 +83,6 @@
       TableDialog,
       UserFormDialog
     },
-    directives: {waves},
     filters: {},
     data() {
       return {
