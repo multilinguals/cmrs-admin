@@ -11,7 +11,7 @@
               style="float: right;"
               type="primary"
               icon="el-icon-plus"
-              @click="handleCreate"
+              @click="handleDialog('userFormDialog', 'create')"
               size="medium"
       >
         添加用户
@@ -33,12 +33,12 @@
       </el-table-column>
       <el-table-column label="关联账号" width="110px" align="center">
         <template slot-scope="scope">
-          <el-button type="text" @click="handleShowAccountList(scope.row.accountViewList)">查看</el-button>
+          <el-button type="text" @click="handleDialog('accountListDialog', scope.row.accountViewList)">查看</el-button>
         </template>
       </el-table-column>
       <el-table-column label="用户角色" width="110px" align="center">
         <template slot-scope="scope">
-          <el-button type="text" @click="handleShowRoleList(scope.row.roleViewList)">查看</el-button>
+          <el-button type="text" @click="handleDialog('roleListDialog', scope.row.roleViewList)">查看</el-button>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" sortable align="center">
@@ -48,12 +48,15 @@
       </el-table-column>
       <el-table-column label="操作" fixed="right" align="center" width="330" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
+          <el-button type="primary" size="mini" @click="handleDialog('userFormDialog', 'update', row)">
             编辑
           </el-button>
-          <el-button size="mini" type="danger">
-            删除
+          <el-button type="warning" size="mini" @click="handleDialog('passFormDialog', row)">
+            修改密码
           </el-button>
+<!--          <el-button size="mini" type="danger">-->
+<!--            删除-->
+<!--          </el-button>-->
         </template>
       </el-table-column>
     </el-table>
@@ -63,25 +66,29 @@
 
     <user-form-dialog
             ref="userFormDialog"
-            @create-data="createData"
+            @create="createData"
+            @update="updateData"
     ></user-form-dialog>
+    <pass-form-dialog ref="passFormDialog" @update-pass="updatePassword"></pass-form-dialog>
     <table-dialog title="账号列表" :head="accountListHead" ref="accountListDialog"></table-dialog>
     <table-dialog title="角色列表" :head="roleListHead" ref="roleListDialog"></table-dialog>
   </div>
 </template>
 
 <script>
-  import {getUsers, createUser, updateUser} from '@/api/user'
-  import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+  import {getUsers, createClerk, updateUser, updateUserPassword} from '@/api/user'
+  import Pagination from '@/components/Pagination'
   import TableDialog from '@/components/Dialog/TableDialog'
-  import UserFormDialog from './UserFormDialog'
+  import { UserFormDialog, PassFormDialog } from './component'
+  import md5 from 'crypto-js/md5'
 
   export default {
-    name: 'User',
+    name: 'UserIndex',
     components: {
       Pagination,
       TableDialog,
-      UserFormDialog
+      UserFormDialog,
+      PassFormDialog
     },
     filters: {},
     data() {
@@ -122,38 +129,31 @@
         this.listQuery.page = 1
         this.getList()
       },
-      handleShowAccountList(data) {
-        this.$refs.accountListDialog.open(data)
+      handleDialog(ref, ...map) {
+        this.$refs[ref].open(...map)
       },
-      handleShowRoleList(data) {
-        this.$refs.roleListDialog.open(data)
-      },
-      handleCreate() {
-        this.$refs.userFormDialog.open('create')
-      },
-      createData(data, callback) {
-        createUser(data).then(() => {
+      createData(form, callback) {
+        const data = Object.assign({}, form)
+        data.password = md5(data.password).toString()
+        createClerk(data).then(() => {
           callback("创建用户成功")
         })
       },
-      handleUpdate(row) {
-        this.$refs.userFormDialog.open('edit', row)
-      },
-      updateData(data, callback) {
+      updateData(form, callback) {
+        const data = {
+          realName: form.realName,
+          id: form.id
+        }
         updateUser(data).then(() => {
           callback("修改用户成功")
         })
       },
-      // handleDelete(row) {
-      //   this.$notify({
-      //     title: 'Success',
-      //     message: 'Delete Successfully',
-      //     type: 'success',
-      //     duration: 2000
-      //   })
-      //   const index = this.list.indexOf(row)
-      //   this.list.splice(index, 1)
-      // },
+      updatePassword(form, callback) {
+        const data = Object.assign({}, form)
+        updateUserPassword(data).then(() => {
+          callback("修改密码成功")
+        })
+      }
     }
   }
 </script>

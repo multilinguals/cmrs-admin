@@ -30,9 +30,9 @@ export function getUsers(params) {
   })
 }
 
-export function createUser(data) {
+export function createClerk(data) {
   return request({
-    url: '/admin/create-user',
+    url: '/admin/create-clerk',
     method: 'post',
     data
   })
@@ -40,8 +40,24 @@ export function createUser(data) {
 
 export function updateUser(data) {
   return request({
-    url: '/admin/create-user',
-    method: 'put',
+    url: '/admin/update-user-details',
+    method: 'post',
+    data
+  })
+}
+
+export function updateUserPassword(data) {
+  return request({
+    url: '/admin/update-user-password',
+    method: 'post',
+    data
+  })
+}
+
+export function updatePassword(data) {
+  return request({
+    url: '/admin/update-self-password',
+    method: 'post',
     data
   })
 }
