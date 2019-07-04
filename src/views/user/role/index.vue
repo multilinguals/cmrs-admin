@@ -65,7 +65,7 @@
   // import UserFormDialog from './UserFormDialog'
 
   export default {
-    name: 'User',
+    name: 'UserRole',
     components: {
       Pagination,
       TableDialog
