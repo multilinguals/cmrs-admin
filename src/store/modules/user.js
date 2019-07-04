@@ -5,7 +5,8 @@ import { resetRouter } from '@/router'
 const state = {
   token: getToken(),
   name: '',
-  avatar: ''
+  avatar: '',
+  userDetail: {}
 }
 
 const mutations = {
@@ -17,6 +18,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_USER_DETAIL: (state, detail) => {
+    state.userDetail = Object.assign({}, detail)
   }
 }
 
@@ -47,6 +51,7 @@ const actions = {
 
         const { realName } = data
 
+        commit('SET_USER_DETAIL', data)
         commit('SET_NAME', realName)
         commit('SET_AVATAR', "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
         resolve(data)

@@ -51,8 +51,29 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: {title: 'Dashboard', icon: 'dashboard'}
     }]
+  },
+
+  {
+    path: '/setting',
+    component: Layout,
+    redirect: '/setting/user',
+    hidden: true,
+    children: [
+      {
+        path: 'user',
+        name: 'SettingUser',
+        component: () => import('@/views/setting/user'),
+        meta: {title: 'Dashboard', icon: 'dashboard'}
+      },
+      {
+        path: 'password',
+        name: 'SettingPassword',
+        component: () => import('@/views/setting/password'),
+        meta: {title: '修改密码', icon: 'dashboard'}
+      }
+    ]
   },
 
   {
@@ -60,34 +81,32 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/user/index',
     name: 'User',
-    meta: { title: '系统用户', icon: 'meeting_fill' },
+    meta: {title: '系统用户', icon: 'meeting_fill'},
     children: [
       {
         path: 'index',
-        name: 'User',
+        name: 'UserIndex',
         component: () => import('@/views/user/user/index'),
-        meta: { title: '用户管理', icon: 'people_fill' }
+        meta: {title: '用户管理', icon: 'people_fill'}
       },
       {
         path: 'role',
-        name: 'Role',
+        name: 'UserRole',
         component: () => import('@/views/user/role/index'),
-        meta: { title: '角色管理', icon: 'eye' }
+        meta: {title: '角色管理', icon: 'eye'}
       }
     ]
   },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '*', redirect: '/404', hidden: true}
 ]
 
-export const asyncRoutes = [
-
-]
+export const asyncRoutes = []
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 
