@@ -118,7 +118,9 @@
     methods: {
       getList() {
         this.listLoading = true
-        getUsers(this.listQuery).then(response => {
+        const query = Object.assign({}, this.listQuery)
+        query.page -= 1
+        getUsers(query).then(response => {
           this.list = response.data.content
           this.total = response.data.totalElements
 
