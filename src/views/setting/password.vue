@@ -18,6 +18,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import { updatePassword } from '@/api/user'
+  import { validPassword } from '@/utils/validate'
   import md5 from 'crypto-js/md5'
 
   export default {
@@ -32,12 +33,18 @@
         if (value === '') {
           callback(new Error('请输入密码'))
         } else {
-          if (this.form.checkPass !== '') {
-            this.$refs.dataForm.validateField('checkPass')
+          try {
+            validPassword(value)
+            if (this.form.checkPass !== '') {
+              console.log(this.$refs['formDialog'])
+              this.$refs['formDialog'].$refs.dataForm.validateField('checkPass')
+            }
+            callback()
+          }catch (e) {
+            callback(e)
           }
-          callback()
         }
-      };
+      }
       const validateCheckPass = (rule, value, callback) => {
         console.log(value)
         if (value === '') {
@@ -47,7 +54,7 @@
         } else {
           callback()
         }
-      };
+      }
 
       return {
         form: {

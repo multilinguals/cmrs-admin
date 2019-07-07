@@ -19,6 +19,7 @@
 
 <script>
   import FormDialog from '@/components/Dialog/FormDialog'
+  import { validPassword } from '@/utils/validate'
 
   export default {
     name: "PassFormDialog",
@@ -31,11 +32,16 @@
         if (value === '') {
           callback(new Error('请输入密码'))
         } else {
-          if (this.form.checkPass !== '') {
-            console.log(this.$refs['formDialog'])
-            this.$refs['formDialog'].$refs.dataForm.validateField('checkPass')
+          try {
+            validPassword(value)
+            if (this.form.checkPass !== '') {
+              console.log(this.$refs['formDialog'])
+              this.$refs['formDialog'].$refs.dataForm.validateField('checkPass')
+            }
+            callback()
+          }catch (e) {
+            callback(e)
           }
-          callback()
         }
       }
       let validateCheckPass = (rule, value, callback) => {
