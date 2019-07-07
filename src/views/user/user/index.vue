@@ -139,6 +139,7 @@
         data.password = md5(data.password).toString()
         createClerk(data).then(() => {
           callback("创建用户成功")
+          this.getList()
         })
       },
       updateData(form, callback) {
@@ -148,12 +149,14 @@
         }
         updateUser(data).then(() => {
           callback("修改用户成功")
+          this.getList()
         })
       },
       updatePassword(form, callback) {
         const data = Object.assign({}, form)
         updateUserPassword(data).then(() => {
           callback("修改密码成功")
+          this.getList()
         })
       }
     }
