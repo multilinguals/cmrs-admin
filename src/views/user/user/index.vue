@@ -153,7 +153,11 @@
         })
       },
       updatePassword(form, callback) {
-        const data = Object.assign({}, form)
+        const data = {
+          userId: form.userId,
+          userPasswordId: form.userPasswordId,
+          newUserPassword: md5(form.password).toString()
+        }
         updateUserPassword(data).then(() => {
           callback("修改密码成功")
           this.getList()
