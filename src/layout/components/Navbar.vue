@@ -11,6 +11,11 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <router-link to="/setting/user">
+            <el-dropdown-item>
+              个人信息
+            </el-dropdown-item>
+          </router-link>
           <router-link to="/setting/password">
             <el-dropdown-item>
               修改密码
