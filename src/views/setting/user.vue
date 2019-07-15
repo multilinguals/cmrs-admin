@@ -72,9 +72,13 @@
 
 <script>
   import {mapGetters} from 'vuex'
+  import BioSection from '@/components/BioSection'
 
   export default {
     name: "SettingUser",
+    components: {
+      BioList
+    },
     computed: {
       ...mapGetters([
         'name',
@@ -82,6 +86,13 @@
         'userDetail'
       ])
     },
+    data () {
+      return {
+        items: [
+          {icon: 'eye', title: '权限'}
+        ]
+      }
+    }
   }
 </script>
 
