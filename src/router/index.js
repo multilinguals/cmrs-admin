@@ -56,6 +56,28 @@ export const constantRoutes = [
   },
 
   {
+    path: '/restaurant',
+    component: Layout,
+    redirect: '/restaurant/index',
+    meta: {title: '餐厅', icon: 'restaurant'},
+    children: [
+      {
+        path: 'index',
+        name: 'RestaurantIndex',
+        component: () => import('@/views/restaurant/index'),
+        meta: {title: '餐厅管理', icon: 'restaurant'}
+      },
+      {
+        path: 'detail/:id',
+        name: 'RestaurantDetail',
+        component: () => import('@/views/restaurant/detail'),
+        meta: {title: '餐厅详情', icon: 'restaurant'},
+        hidden: true,
+      }
+    ]
+  },
+
+  {
     path: '/setting',
     component: Layout,
     redirect: '/setting/user',
