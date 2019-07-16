@@ -5,40 +5,35 @@
       <span>{{ title }}</span>
     </div>
     <div class="bio-section-body">
-      <slot></slot>
+      <template v-if="description">
+        {{ description }}
+      </template>
+      <slot v-else></slot>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "BioList",
+    name: "BioSection",
     props: {
       title: String,
-      icon: String
+      icon: String,
+      description: String
     }
   }
 </script>
 
 <style scoped lang="scss">
-  .bio-list {
-    margin-top: 20px;
-    color: #606266;
+  .bio-section {
+    font-size: 14px;
+    padding: 15px 0;
 
-    span {
-      padding-left: 4px;
-    }
-
-    .bio-section {
-      font-size: 14px;
-      padding: 15px 0;
-
-      .bio-section-header {
-        border-bottom: 1px solid #dfe6ec;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-        font-weight: bold;
-      }
+    .bio-section-header {
+      border-bottom: 1px solid #dfe6ec;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      font-weight: bold;
     }
   }
 </style>
