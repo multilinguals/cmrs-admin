@@ -11,61 +11,44 @@
     </div>
 
     <div class="user-bio">
-      <div class="user-skills user-bio-section">
-        <div class="user-bio-section-header">
-          <svg-icon icon-class="eye"/>
-          <span>权限</span></div>
-        <div class="user-bio-section-body">
-          <el-tag
-                  v-for="item in userDetail.roleViewList"
-                  :key="item.id"
-          >{{ item.name }}
-          </el-tag>
-        </div>
-      </div>
-      <div class="user-skills user-bio-section">
-        <div class="user-bio-section-header">
-          <svg-icon icon-class="switch-user"/>
-          <span>账号</span></div>
-        <div class="user-bio-section-body">
-          <el-alert
-                  v-for="account in userDetail.accountViewList"
-                  :key="account.id"
-                  :title="account.type"
-                  type="info"
-                  :closable="false"
+      <bio-section
+              title="权限"
+              icon="eye"
+      >
+        <el-tag
+                v-for="item in userDetail.roleViewList"
+                :key="item.id"
+        >{{ item.name }}
+        </el-tag>
+      </bio-section>
+      <bio-section
+              title="账号"
+              icon="switch-user"
+      >
+        <el-alert
+                v-for="account in userDetail.accountViewList"
+                :key="account.id"
+                :title="account.type"
+                type="info"
+                :closable="false"
+        >
+          <template
+                  slot="default"
           >
-            <template
-                    slot="default"
-            >
-              <span>{{ account.idInType }}</span>
-              <el-divider direction="vertical"></el-divider>
-              <span>{{ account.id }}</span>
-            </template>
-          </el-alert>
-        </div>
-      </div>
-
-      <div class="user-education user-bio-section">
-        <div class="user-bio-section-header">
-          <svg-icon icon-class="time-circle"/>
-          <span>创建时间</span></div>
-        <div class="user-bio-section-body">
-          <div class="text-muted">
-            {{ userDetail.createdAt }}
-          </div>
-        </div>
-      </div>
-      <div class="user-education user-bio-section">
-        <div class="user-bio-section-header">
-          <svg-icon icon-class="time-circle"/>
-          <span>更新时间</span></div>
-        <div class="user-bio-section-body">
-          <div class="text-muted">
-            {{ userDetail.updatedAt }}
-          </div>
-        </div>
-      </div>
+            <span>{{ account.idInType }}</span>
+            <el-divider direction="vertical"></el-divider>
+            <span>{{ account.id }}</span>
+          </template>
+        </el-alert>
+      </bio-section>
+      <bio-section
+              title="创建时间"
+              icon="time-circle"
+              :description="userDetail.createdAt"/>
+      <bio-section
+              title="更新时间"
+              icon="time-circle"
+              :description="userDetail.updatedAt"/>
     </div>
   </div>
 </template>
@@ -77,7 +60,7 @@
   export default {
     name: "SettingUser",
     components: {
-      BioList
+      BioSection
     },
     computed: {
       ...mapGetters([
@@ -141,18 +124,6 @@
 
     span {
       padding-left: 4px;
-    }
-
-    .user-bio-section {
-      font-size: 14px;
-      padding: 15px 0;
-
-      .user-bio-section-header {
-        border-bottom: 1px solid #dfe6ec;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-        font-weight: bold;
-      }
     }
   }
 </style>

@@ -51,7 +51,7 @@
           <span>{{ scope.row.createdAt }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" fixed="right" align="center" width="330" class-name="small-padding fixed-width">
+      <el-table-column label="操作" fixed="right" align="center" width="80" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleDialog('userFormDialog', 'update', row)">
             编辑
@@ -88,6 +88,9 @@
           size: 20
         }
       }
+    },
+    created() {
+      this.getList()
     },
     methods: {
       getList() {
