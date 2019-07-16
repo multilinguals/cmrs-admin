@@ -1,11 +1,6 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <!--<el-input v-model="listQuery.title" placeholder="名称" style="width: 200px;" class="filter-item"-->
-                <!--@keyup.enter.native="handleFilter"/>-->
-      <!--<el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">-->
-        <!--搜索-->
-      <!--</el-button>-->
       <el-button
               class="filter-item"
               style="float: right;"
@@ -54,9 +49,9 @@
           <el-button type="warning" size="mini" @click="handleDialog('passFormDialog', row)">
             修改密码
           </el-button>
-<!--          <el-button size="mini" type="danger">-->
-<!--            删除-->
-<!--          </el-button>-->
+          <el-button type="info" size="mini" @click="handleDialog('userFormDialog', 'update', row)">
+            分配权限
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
