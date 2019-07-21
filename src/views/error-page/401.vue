@@ -19,9 +19,10 @@
             </router-link>
           </li>
           <li class="link-type">
-            <a href="https://www.taobao.com/">随便看看</a>
+            <router-link to="/login">
+              重新登录
+            </router-link>
           </li>
-          <li><a href="#" @click.prevent="dialogVisible=true">点我看图</a></li>
         </ul>
       </el-col>
       <el-col :span="12">
