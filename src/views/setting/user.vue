@@ -2,7 +2,7 @@
   <div class="app-container" style="width: 500px;margin-left:50px;">
     <div class="user-profile">
       <div class="box-center">
-        <el-avatar style="width: 100px;height: 100px;" :src="avatar+'?imageView2/1/w/100/h/100'"></el-avatar>
+        <vue-letter-avatar :name="name" size="100" :rounded=true />
       </div>
       <div class="box-center">
         <div class="user-name text-center">{{ name }}</div>

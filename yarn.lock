@@ -10133,6 +10133,11 @@ vue-jest@^3.0.4:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-letter-avatar@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.npm.taobao.org/vue-letter-avatar/download/vue-letter-avatar-0.1.6.tgz#c990420352d52b1828b2c0daba01438885a815b8"
+  integrity sha1-yZBCA1LVKxgossDaugFDiIWoFbg=
+
 vue-loader@^15.7.0:
   version "15.7.0"
   resolved "https://registry.npm.taobao.org/vue-loader/download/vue-loader-15.7.0.tgz#27275aa5a3ef4958c5379c006dd1436ad04b25b3"

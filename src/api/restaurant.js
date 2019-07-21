@@ -8,7 +8,6 @@ export function getRestaurants(params) {
   })
 }
 
-
 export function createRestaurant(data) {
   return request({
     url: '/admin/create-restaurant',
@@ -29,13 +28,5 @@ export function getRestaurant(id) {
   return request({
     url: `/admin/get-restaurant-details/${id}`,
     method: 'get'
-  })
-}
-
-export function getMenus(id, params) {
-  return request({
-    url: `admin/get-restaurant/${id}/single-menu-item-list`,
-    method: 'get',
-    params
   })
 }
