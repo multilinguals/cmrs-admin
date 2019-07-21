@@ -6,10 +6,9 @@
 
     <div class="user-profile">
       <div class="box-center">
-<!--        <pan-thumb :image="user.avatar" :height="'100px'" :width="'100px'" :hoverable="false">-->
-<!--          <div>Hello</div>-->
-<!--          {{ user.role }}-->
-<!--        </pan-thumb>-->
+        <template v-if="restaurant.name">
+          <vue-letter-avatar :name="restaurant.name" size="100" :rounded=true />
+        </template>
       </div>
       <div class="box-center">
         <div class="user-name text-center">{{ restaurant.name }}</div>
@@ -44,9 +43,6 @@
         default: () => {
           return {
             name: '',
-            email: '',
-            avatar: '',
-            roles: ''
           }
         }
       }

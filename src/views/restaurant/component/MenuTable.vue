@@ -6,7 +6,7 @@
               style="float: right;"
               type="primary"
               icon="el-icon-plus"
-              @click="handleDialog('restaurantFormDialog', 'create')"
+              @click="handleDialog('menuFormDialog', 'create')"
               size="medium"
       >
         添加单品
@@ -53,7 +53,7 @@
       </el-table-column>
       <el-table-column label="操作" fixed="right" align="center" width="80" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleDialog('userFormDialog', 'update', row)">
+          <el-button type="primary" size="mini" @click="handleDialog('menuFormDialog', 'update', row)">
             编辑
           </el-button>
         </template>
@@ -62,12 +62,19 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size"
                 @pagination="getList"/>
+
+    <menu-form-dialog
+            ref="menuFormDialog"
+            @create="createData"
+            @update="updateData"
+    ></menu-form-dialog>
   </div>
 </template>
 
 <script>
   import Pagination from '@/components/Pagination'
-  import {getMenus} from '@/api/restaurant'
+  import {getMenus, createSingleMenu, updateSingleMenu} from '@/api/menu'
+  import MenuFormDialog from './MenuFormDialog'
 
   export default {
     name: "MenuTable",
@@ -75,7 +82,8 @@
       restaurantId: String
     },
     components: {
-      Pagination
+      Pagination,
+      MenuFormDialog
     },
     data() {
       return {
@@ -113,17 +121,17 @@
       },
       createData(form, callback) {
         const data = Object.assign({}, form)
-        createRestaurant(data).then(() => {
+        data.restaurantId = this.restaurantId
+        console.log(data)
+        createSingleMenu(data).then(() => {
           callback("创建餐厅成功")
           this.getList()
         })
       },
       updateData(form, callback) {
-        const data = {
-          realName: form.realName,
-          id: form.id
-        }
-        updateRestaurant(data).then(() => {
+        const data = Object.assign({}, form)
+        console.log(data)
+        updateSingleMenu(this.restaurantId, data).then(() => {
           callback("修改餐厅成功")
           this.getList()
         })
