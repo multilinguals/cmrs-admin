@@ -1,10 +1,17 @@
 import request from '@/utils/request'
 
-export function getMenus(id, params) {
+export function getSingleMenus(id, params) {
   return request({
     url: `admin/get-restaurant/${id}/single-menu-item-list`,
     method: 'get',
     params
+  })
+}
+
+export function getAllSingleMenus(id) {
+  return request({
+    url: `admin/get-restaurant/${id}/all-single-menu-items`,
+    method: 'get'
   })
 }
 
@@ -24,6 +31,29 @@ export function updateSingleMenu(id, data) {
   })
 }
 
+export function getSetMenus(id, params) {
+  return request({
+    url: `/admin/get-restaurant/${id}/set-menu-item-list`,
+    method: 'get',
+    params
+  })
+}
+
+export function createSetMenu(data) {
+  return request({
+    url: `admin/create-set-menu-item`,
+    method: 'post',
+    data
+  })
+}
+
+export function updateSetMenu(id, data) {
+  return request({
+    url: `/admin/update-restaurant/${id}/set-menu-item`,
+    method: 'post',
+    data
+  })
+}
 
 export function getDishTypeList() {
   return request({
