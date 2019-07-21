@@ -10,10 +10,10 @@
         <el-card>
           <el-tabs v-model="activeTab">
             <el-tab-pane label="单品列表" name="menu_single">
-              <menu-table :restaurantId="restaurantId"></menu-table>
+              <single-menu-table :restaurantId="restaurantId"></single-menu-table>
             </el-tab-pane>
-            <el-tab-pane label="套餐列表" name="menu_multi">
-
+            <el-tab-pane label="套餐列表" name="menu_set">
+              <set-menu-table :restaurantId="restaurantId"></set-menu-table>
             </el-tab-pane>
           </el-tabs>
         </el-card>
@@ -25,13 +25,14 @@
 
 <script>
   import {getRestaurant} from '@/api/restaurant'
-  import {MenuTable, RestaurantCard} from './component'
+  import {SingleMenuTable, SetMenuTable, RestaurantCard} from './component'
 
   export default {
     name: "RestaurantDetail",
     components: {
-      MenuTable,
-      RestaurantCard
+      SingleMenuTable,
+      RestaurantCard,
+      SetMenuTable
     },
     data() {
       return {

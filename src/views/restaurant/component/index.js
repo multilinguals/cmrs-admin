@@ -1,9 +1,11 @@
-import RestaurantFormDialog from './RestaurantFormDialog'
-import MenuTable from './MenuTable'
+import SingleMenuTable from './SingleMenuTable'
+import SetMenuTable from './SetMenuTable'
 import RestaurantCard from './RestaurantCard'
+import RestaurantFormDialog from './RestaurantFormDialog'
 
 export {
   RestaurantFormDialog,
-  MenuTable,
-  RestaurantCard
+  SingleMenuTable,
+  RestaurantCard,
+  SetMenuTable
 }

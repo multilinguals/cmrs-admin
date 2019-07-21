@@ -73,11 +73,11 @@
 
 <script>
   import Pagination from '@/components/Pagination'
-  import {getMenus, createSingleMenu, updateSingleMenu} from '@/api/menu'
-  import MenuFormDialog from './MenuFormDialog'
+  import {getSingleMenus, createSingleMenu, updateSingleMenu} from '@/api/menu'
+  import MenuFormDialog from './SingleMenuFormDialog'
 
   export default {
-    name: "MenuTable",
+    name: "SingleMenuTable",
     props: {
       restaurantId: String
     },
@@ -105,9 +105,9 @@
         this.listLoading = true
         const query = Object.assign({}, this.listQuery)
         query.page -= 1
-        getMenus(this.restaurantId, query).then(response => {
+        getSingleMenus(this.restaurantId, query).then(response => {
           this.list = response.data.content
-          this.total = response.data.totalElements
+          this.total = response.data.pageInfo.totalElements
 
           this.listLoading = false
         })
@@ -124,7 +124,7 @@
         data.restaurantId = this.restaurantId
         console.log(data)
         createSingleMenu(data).then(() => {
-          callback("创建餐厅成功")
+          callback("创建单品成功")
           this.getList()
         })
       },
@@ -132,7 +132,7 @@
         const data = Object.assign({}, form)
         console.log(data)
         updateSingleMenu(this.restaurantId, data).then(() => {
-          callback("修改餐厅成功")
+          callback("修改单品成功")
           this.getList()
         })
       }

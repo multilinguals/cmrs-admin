@@ -117,7 +117,7 @@
         query.page -= 1
         getUsers(query).then(response => {
           this.list = response.data.content
-          this.total = response.data.totalElements
+          this.total = response.data.pageInfo.totalElements
 
           this.listLoading = false
         })
