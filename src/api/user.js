@@ -61,3 +61,19 @@ export function updatePassword(data) {
     data
   })
 }
+
+export function assignRole(data) {
+  return request({
+    url: '/admin/assign-role-to-user',
+    method: 'post',
+    data
+  })
+}
+
+export function removeRole(data) {
+  return request({
+    url: '/admin/remove-role-from-user',
+    method: 'post',
+    data
+  })
+}

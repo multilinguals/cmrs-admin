@@ -49,7 +49,7 @@
           <el-button type="warning" size="mini" @click="handleDialog('passFormDialog', row)">
             修改密码
           </el-button>
-          <el-button type="info" size="mini" @click="handleDialog('userFormDialog', 'update', row)">
+          <el-button type="info" size="mini" @click="handleDialog('roleCheckDialog', row)">
             分配权限
           </el-button>
         </template>
@@ -67,6 +67,7 @@
     <pass-form-dialog ref="passFormDialog" @update-pass="updatePassword"></pass-form-dialog>
     <table-dialog title="账号列表" :head="accountListHead" ref="accountListDialog"></table-dialog>
     <table-dialog title="角色列表" :head="roleListHead" ref="roleListDialog"></table-dialog>
+    <role-check-dialog ref="roleCheckDialog"></role-check-dialog>
   </div>
 </template>
 
@@ -74,7 +75,7 @@
   import {getUsers, createClerk, updateUser, updateUserPassword} from '@/api/user'
   import Pagination from '@/components/Pagination'
   import TableDialog from '@/components/Dialog/TableDialog'
-  import { UserFormDialog, PassFormDialog } from './component'
+  import { UserFormDialog, PassFormDialog, RoleCheckDialog } from './component'
   import md5 from 'crypto-js/md5'
 
   export default {
@@ -83,7 +84,8 @@
       Pagination,
       TableDialog,
       UserFormDialog,
-      PassFormDialog
+      PassFormDialog,
+      RoleCheckDialog
     },
     filters: {},
     data() {
