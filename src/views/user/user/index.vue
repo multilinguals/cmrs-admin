@@ -49,7 +49,7 @@
           <el-button type="warning" size="mini" @click="handleDialog('passFormDialog', row)">
             修改密码
           </el-button>
-          <el-button type="info" size="mini" @click="handleDialog('roleCheckDialog', row)">
+          <el-button type="info" size="mini" @click="handleDialog('roleFormDialog', row)">
             分配权限
           </el-button>
         </template>
@@ -67,15 +67,15 @@
     <pass-form-dialog ref="passFormDialog" @update-pass="updatePassword"></pass-form-dialog>
     <table-dialog title="账号列表" :head="accountListHead" ref="accountListDialog"></table-dialog>
     <table-dialog title="角色列表" :head="roleListHead" ref="roleListDialog"></table-dialog>
-    <role-check-dialog ref="roleCheckDialog"></role-check-dialog>
+    <role-form-dialog ref="roleFormDialog" @assign-roles="assignRoles"></role-form-dialog>
   </div>
 </template>
 
 <script>
-  import {getUsers, createClerk, updateUser, updateUserPassword} from '@/api/user'
+  import {getUsers, createClerk, updateUser, updateUserPassword, assignRole} from '@/api/user'
   import Pagination from '@/components/Pagination'
   import TableDialog from '@/components/Dialog/TableDialog'
-  import { UserFormDialog, PassFormDialog, RoleCheckDialog } from './component'
+  import { UserFormDialog, PassFormDialog, RoleFormDialog } from './component'
   import md5 from 'crypto-js/md5'
 
   export default {
@@ -85,7 +85,7 @@
       TableDialog,
       UserFormDialog,
       PassFormDialog,
-      RoleCheckDialog
+      RoleFormDialog
     },
     filters: {},
     data() {
@@ -118,8 +118,8 @@
         const query = Object.assign({}, this.listQuery)
         query.page -= 1
         getUsers(query).then(response => {
-          this.list = response.data.content
-          this.total = response.data.pageInfo.totalElements
+          this.list = response.content
+          this.total = response.pageInfo.totalElements
 
           this.listLoading = false
         })
@@ -157,6 +157,15 @@
         }
         updateUserPassword(data).then(() => {
           callback("修改密码成功")
+          this.getList()
+        })
+      },
+      assignRoles(form, callback) {
+        assignRole(
+          form.userId,
+          { roleIdList: form.roleIdList }
+        ).then(() => {
+          callback("分配权限成功")
           this.getList()
         })
       }

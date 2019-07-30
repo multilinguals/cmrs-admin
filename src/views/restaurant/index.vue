@@ -21,11 +21,11 @@
             highlight-current-row
             style="width: 100%;"
     >
-      <el-table-column label="餐厅ID" width="250px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="餐厅ID" width="250px" align="center">-->
+<!--        <template slot-scope="scope">-->
+<!--          <span>{{ scope.row.id }}</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column label="名称" width="110px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
@@ -105,8 +105,8 @@
         const query = Object.assign({}, this.listQuery)
         query.page -= 1
         getRestaurants(query).then(response => {
-          this.list = response.data.content
-          this.total = response.data.pageInfo.totalElements
+          this.list = response.content
+          this.total = response.pageInfo.totalElements
 
           this.listLoading = false
         })

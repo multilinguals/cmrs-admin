@@ -71,7 +71,7 @@
     },
     created() {
       getAllSingleMenus(this.restaurantId).then(res => {
-        this.singleList = res.data
+        this.singleList = res
       })
     },
     methods: {

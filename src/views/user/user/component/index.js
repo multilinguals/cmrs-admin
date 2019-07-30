@@ -1,9 +1,9 @@
 import UserFormDialog from './UserFormDialog'
 import PassFormDialog from './PassFormDialog'
-import RoleCheckDialog from './RoleCheckDialog'
+import RoleFormDialog from './RoleFormDialog'
 
 export {
   UserFormDialog,
-  RoleCheckDialog,
+  RoleFormDialog,
   PassFormDialog
 }

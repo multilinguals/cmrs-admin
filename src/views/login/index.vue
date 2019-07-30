@@ -113,7 +113,7 @@ export default {
           const form = Object.assign({}, this.loginForm)
           form.accountType = 0
           form.password = md5(form.password).toString()
-          console.log(form)
+
           this.$store.dispatch('user/login', form).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false

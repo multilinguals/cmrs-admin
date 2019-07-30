@@ -51,7 +51,7 @@
     methods: {
       getDetail() {
         getRestaurant(this.restaurantId).then(res => {
-          this.detail = res.data
+          this.detail = res
         })
       }
     }

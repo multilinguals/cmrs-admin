@@ -21,11 +21,11 @@
             highlight-current-row
             style="width: 100%;"
     >
-      <el-table-column label="单品ID" width="250px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="单品ID" width="250px" align="center">-->
+<!--        <template slot-scope="scope">-->
+<!--          <span>{{ scope.row.id }}</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column label="名称" width="110px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
@@ -51,10 +51,14 @@
           <span>{{ scope.row.createdAt }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" fixed="right" align="center" width="80" class-name="small-padding fixed-width">
+      <el-table-column label="操作" fixed="right" align="center" width="160" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleDialog('menuFormDialog', 'update', row)">
             编辑
+          </el-button>
+
+          <el-button type="danger" size="mini" @click="deleteItem(row)">
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -73,7 +77,7 @@
 
 <script>
   import Pagination from '@/components/Pagination'
-  import {getSingleMenus, createSingleMenu, updateSingleMenu} from '@/api/menu'
+  import {getSingleMenus, createSingleMenu, updateSingleMenu, deleteMenuItem} from '@/api/menu'
   import MenuFormDialog from './SingleMenuFormDialog'
 
   export default {
@@ -106,8 +110,8 @@
         const query = Object.assign({}, this.listQuery)
         query.page -= 1
         getSingleMenus(this.restaurantId, query).then(response => {
-          this.list = response.data.content
-          this.total = response.data.pageInfo.totalElements
+          this.list = response.content
+          this.total = response.pageInfo.totalElements
 
           this.listLoading = false
         })
@@ -134,6 +138,11 @@
         updateSingleMenu(this.restaurantId, data).then(() => {
           callback("修改单品成功")
           this.getList()
+        })
+      },
+      deleteItem (row) {
+        deleteMenuItem(row.id).then(res => {
+
         })
       }
     }

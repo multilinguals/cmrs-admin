@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getRoles(params) {
   return request({
-    url: '/admin/get-role-list',
+    url: '/get-role-list',
     method: 'get',
     params
   })
@@ -10,7 +10,7 @@ export function getRoles(params) {
 
 export function createRole(data) {
   return request({
-    url: '/admin/create-user',
+    url: '/create-user',
     method: 'post',
     data
   })
@@ -18,7 +18,7 @@ export function createRole(data) {
 
 export function updateRole(data) {
   return request({
-    url: '/admin/create-user',
+    url: '/create-user',
     method: 'put',
     data
   })

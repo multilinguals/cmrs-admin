@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/user/sign-in-with-password',
+    url: '/sign-in-with-password',
     method: 'post',
     data
   })
@@ -10,21 +10,21 @@ export function login(data) {
 
 export function getInfo() {
   return request({
-    url: '/user/get-self-details',
+    url: '/get-self-details',
     method: 'get'
   })
 }
 
 export function logout() {
   return request({
-    url: '/user/logout',
+    url: '/logout',
     method: 'post'
   })
 }
 
 export function getUsers(params) {
   return request({
-    url: '/admin/get-user-list',
+    url: '/get-user-list',
     method: 'get',
     params
   })
@@ -32,7 +32,7 @@ export function getUsers(params) {
 
 export function createClerk(data) {
   return request({
-    url: '/admin/create-clerk',
+    url: '/create-clerk',
     method: 'post',
     data
   })
@@ -40,7 +40,7 @@ export function createClerk(data) {
 
 export function updateUser(data) {
   return request({
-    url: '/admin/update-user-details',
+    url: '/update-user-details',
     method: 'post',
     data
   })
@@ -48,7 +48,7 @@ export function updateUser(data) {
 
 export function updateUserPassword(data) {
   return request({
-    url: '/admin/update-user-password',
+    url: '/update-user-password',
     method: 'post',
     data
   })
@@ -56,23 +56,15 @@ export function updateUserPassword(data) {
 
 export function updatePassword(data) {
   return request({
-    url: '/admin/update-self-password',
+    url: '/update-self-password',
     method: 'post',
     data
   })
 }
 
-export function assignRole(data) {
+export function assignRole(userId, data) {
   return request({
-    url: '/admin/assign-role-to-user',
-    method: 'post',
-    data
-  })
-}
-
-export function removeRole(data) {
-  return request({
-    url: '/admin/remove-role-from-user',
+    url: `/set-roles-to-user/${userId}`,
     method: 'post',
     data
   })

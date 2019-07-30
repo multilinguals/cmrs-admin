@@ -29,7 +29,7 @@ const actions = {
   login({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
       login(userInfo).then(response => {
-        const { data } = response
+        const data = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
@@ -43,7 +43,7 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
-        const { data } = response
+        const data = response
 
         if (!data) {
           reject('Verification failed, please Login again.')

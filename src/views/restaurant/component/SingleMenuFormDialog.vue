@@ -74,10 +74,10 @@
     },
     created() {
       getDishTypeList().then(res => {
-        this.dishTypeList = res.data
+        this.dishTypeList = res
       })
       getTasteList().then(res => {
-        this.tasteList = res.data
+        this.tasteList = res
       })
     },
     methods: {

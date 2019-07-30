@@ -97,8 +97,8 @@
         const query = Object.assign({}, this.listQuery)
         query.page -= 1
         getRoles(query).then(response => {
-          this.list = response.data.content
-          this.total = response.data.pageInfo.totalElements
+          this.list = response.content
+          this.total = response.pageInfo.totalElements
 
           this.listLoading = false
         })
