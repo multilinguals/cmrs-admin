@@ -51,15 +51,6 @@
       })
     },
     methods: {
-      successCallback(msg) {
-        this.$refs.formDialog.close()
-        this.$notify({
-          title: '成功',
-          message: msg,
-          type: 'success',
-          duration: 2000
-        })
-      },
       open(data) {
         this.dialog = true
         this.loading = true
@@ -75,7 +66,7 @@
         this.$refs.formDialog.open()
       },
       assignRoles () {
-        this.$emit('assign-roles', this.form, this.successCallback)
+        this.$emit('assign-roles', this.form, this.$refs.formDialog.successCallback)
       }
     }
   }

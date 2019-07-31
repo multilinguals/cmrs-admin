@@ -96,21 +96,17 @@
         this.$nextTick(() => {
           if(data) {
             this.form = Object.assign({}, data)
+          }else {
+            this.form = {
+              username: '',
+              realName: '',
+              password: ''
+            }
           }
         })
       },
-      successCallback(msg) {
-        this.$refs.formDialog.close()
-        this.$notify({
-          title: '成功',
-          message: msg,
-          type: 'success',
-          duration: 2000
-        })
-      },
       formSubmit() {
-        console.log('user-form')
-        this.$emit(this.dialogStatus, this.form, this.successCallback)
+        this.$emit(this.dialogStatus, this.form, this.$refs.formDialog.successCallback)
       }
     }
   }

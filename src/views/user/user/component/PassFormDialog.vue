@@ -73,17 +73,8 @@
       }
     },
     methods: {
-      successCallback(msg) {
-        this.$refs.formDialog.close()
-        this.$notify({
-          title: '成功',
-          message: msg,
-          type: 'success',
-          duration: 2000
-        })
-      },
       updatePassword () {
-        this.$emit('update-pass', this.form, this.successCallback)
+        this.$emit('update-pass', this.form, this.$refs.formDialog.successCallback)
       },
       open(data) {
         this.form.userId = data.id

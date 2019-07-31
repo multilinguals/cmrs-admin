@@ -46,10 +46,14 @@
           <span>{{ scope.row.createdAt }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" fixed="right" align="center" width="80" class-name="small-padding fixed-width">
+      <el-table-column label="操作" fixed="right" align="center" width="160" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleDialog('menuFormDialog', 'update', row)">
             编辑
+          </el-button>
+
+          <el-button type="danger" size="mini" @click="deleteItem(row)">
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -71,7 +75,7 @@
 <script>
   import Pagination from '@/components/Pagination'
   import TableDialog from '@/components/Dialog/TableDialog'
-  import {getSetMenus, createSetMenu, updateSetMenu} from '@/api/menu'
+  import {getSetMenus, createSetMenu, updateSetMenu, deleteSetMenuItem} from '@/api/menu'
   import MenuFormDialog from './SetMenuFormDialog'
 
   export default {
@@ -138,6 +142,11 @@
         updateSetMenu(this.restaurantId, data).then(() => {
           callback("修改套餐成功")
           this.getList()
+        })
+      },
+      deleteItem (row) {
+        deleteSetMenuItem (row.id, this.restaurantId).then(res => {
+
         })
       }
     }

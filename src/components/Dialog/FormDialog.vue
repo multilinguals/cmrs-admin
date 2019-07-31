@@ -61,7 +61,16 @@
         this.$nextTick(() => {
           this.$refs['dataForm'].resetFields()
         })
-      }
+      },
+      successCallback(msg) {
+        this.close()
+        this.$notify({
+          title: '成功',
+          message: msg,
+          type: 'success',
+          duration: 2000
+        })
+      },
     }
   }
 </script>
