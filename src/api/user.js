@@ -38,9 +38,9 @@ export function createClerk(data) {
   })
 }
 
-export function updateUser(data) {
+export function updateUser(id, data) {
   return request({
-    url: '/update-user-details',
+    url: `/update-details-of-user/${id}`,
     method: 'post',
     data
   })

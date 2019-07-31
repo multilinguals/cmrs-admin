@@ -23,9 +23,9 @@ export function createSingleMenu(data) {
   })
 }
 
-export function updateSingleMenu(id, data) {
+export function updateSingleMenu(restId, id, data) {
   return request({
-    url: `/update-restaurant/${id}/single-menu-item`,
+    url: `/update-restaurant/${restId}/single-menu-item/${id}`,
     method: 'post',
     data
   })
@@ -69,9 +69,17 @@ export function getTasteList() {
   })
 }
 
-export function deleteMenuItem(id) {
+export function deleteSingleMenuItem(id, restId) {
   return request({
-    url: `/delete-menu-item/${id}`,
+    url: `/delete-single-menu-item/${id}/of-restaurant/${restId}`,
     method: 'post'
   })
 }
+
+export function deleteSetMenuItem(id, restId) {
+  return request({
+    url: `/delete-set-menu-item/${id}/of-restaurant/${restId}`,
+    method: 'post'
+  })
+}
+
