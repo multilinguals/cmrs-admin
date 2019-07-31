@@ -144,7 +144,7 @@
           realName: form.realName,
           id: form.id
         }
-        updateUser(data).then(() => {
+        updateUser(data.id, data).then(() => {
           callback("修改用户成功")
           this.getList()
         })

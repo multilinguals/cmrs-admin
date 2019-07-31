@@ -77,7 +77,7 @@
 
 <script>
   import Pagination from '@/components/Pagination'
-  import {getSingleMenus, createSingleMenu, updateSingleMenu, deleteMenuItem} from '@/api/menu'
+  import {getSingleMenus, createSingleMenu, updateSingleMenu, deleteSingleMenuItem} from '@/api/menu'
   import MenuFormDialog from './SingleMenuFormDialog'
 
   export default {
@@ -134,14 +134,13 @@
       },
       updateData(form, callback) {
         const data = Object.assign({}, form)
-        console.log(data)
-        updateSingleMenu(this.restaurantId, data).then(() => {
+        updateSingleMenu(this.restaurantId, data.id, data).then(() => {
           callback("修改单品成功")
           this.getList()
         })
       },
       deleteItem (row) {
-        deleteMenuItem(row.id).then(res => {
+        deleteSingleMenuItem(row.id, this.restaurantId).then(res => {
 
         })
       }

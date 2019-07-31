@@ -53,7 +53,7 @@
               查看
             </el-button>
           </router-link>
-          <el-button type="primary" size="mini" @click="handleDialog('userFormDialog', 'update', row)">
+          <el-button type="primary" size="mini" @click="handleDialog('restaurantFormDialog', 'update', row)">
             编辑
           </el-button>
 
