@@ -15,7 +15,7 @@
           <el-option
                   v-for="item in dishTypeList"
                   :key="item.id"
-                  :label="item.name"
+                  :label="item.localName"
                   :value="item.id">
           </el-option>
         </el-select>
@@ -25,7 +25,7 @@
           <el-option
                   v-for="item in tasteList"
                   :key="item.id"
-                  :label="item.name"
+                  :label="item.localName"
                   :value="item.id">
           </el-option>
         </el-select>

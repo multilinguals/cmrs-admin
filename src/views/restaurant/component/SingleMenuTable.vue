@@ -33,12 +33,12 @@
       </el-table-column>
       <el-table-column label="菜品" width="110px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.dishTypeName }}</span>
+          <span>{{ scope.row.localDishTypeName }}</span>
         </template>
       </el-table-column>
       <el-table-column label="口味" align="center" width="110px">
         <template slot-scope="scope">
-          <span>{{ scope.row.tasteName }}</span>
+          <span>{{ scope.row.localTasteName }}</span>
         </template>
       </el-table-column>
       <el-table-column label="单价" sortable align="center" width="110px">
@@ -141,7 +141,13 @@
       },
       deleteItem (row) {
         deleteSingleMenuItem(row.id, this.restaurantId).then(res => {
-
+          this.$notify({
+            title: '成功',
+            message: '单品删除成功',
+            type: 'success',
+            duration: 2000
+          })
+          this.getList()
         })
       }
     }
