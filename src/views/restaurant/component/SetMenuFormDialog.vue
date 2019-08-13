@@ -13,9 +13,9 @@
       <el-form-item label="单价" prop="price">
         <el-input-number v-model="form.price" :precision="2" :step="0.1" :min="0"></el-input-number>
       </el-form-item>
-      <el-form-item label="选择单品" prop="name">
+      <el-form-item label="选择单品" >
         <el-select
-                v-model="form.singleItemIdList"
+                v-model="singleItemIdList"
                 multiple
                 filterable
                 default-first-option
@@ -27,6 +27,14 @@
                   :value="item.id">
           </el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item v-for="item in form.subItems" :key="item.singleMenuItemId">
+        <el-col :span="6">
+          {{ findSingleName(item.singleMenuItemId) }}
+        </el-col>
+        <el-col :span="6">
+          <el-input-number :min="1" :max="10" size="mini" v-model="item.quantity" :key="item.singleMenuItemId" @change="handleChange(item)"></el-input-number>
+        </el-col>
       </el-form-item>
     </template>
   </form-dialog>
@@ -44,6 +52,22 @@
     components: {
       FormDialog
     },
+    watch: {
+      singleItemIdList: function (val) {
+        console.log('result')
+        console.log(this.form.subItems)
+        for (const id of val) {
+          const index = this.findSingleIndex(id)
+          if (index < 0) {
+            continue
+          }
+          this.$set(this.form.subItems, index, {
+            singleMenuItemId: id,
+            quantity: 1
+          })
+        }
+      }
+    },
     data() {
       return {
         dialogStatus: 'create',
@@ -57,8 +81,9 @@
         form: {
           name: '',
           price: '',
-          singleItemIdList: []
+          subItems: []
         },
+        singleItemIdList: [],
         rules: {
           name: [
             {
@@ -82,18 +107,50 @@
 
         this.$nextTick(() => {
           if (data) {
+            console.log(data)
             this.form = Object.assign({}, data)
-          }else {
+            const singleItemIdList = []
+            const subItems = []
+            for (const item of data.subItemViews) {
+              subItems.push({
+                singleMenuItemId: item.singleMenuItemView.id,
+                quantity: item.quantity
+              })
+              singleItemIdList.push(item.singleMenuItemView.id)
+            }
+
+            this.$set(this.form, 'subItems', subItems)
+            this.singleItemIdList = singleItemIdList
+          } else {
             this.form = {
               name: '',
               price: '',
-              singleItemIdList: []
+              subItems: []
             }
           }
         })
       },
       formSubmit() {
         this.$emit(this.dialogStatus, this.form, this.$refs.formDialog.successCallback)
+      },
+      findSingleName(id) {
+        for(const item of this.singleList) {
+          if(item.id === id) {
+            return item.name
+          }
+        }
+      },
+      findSingleIndex(id) {
+        if(this.form.subItems.length === 0) {
+          return -1
+        }
+        for(const index in this.form.subItems) {
+          if(this.form.subItems[index].id === id) {
+            return index
+          }
+        }
+
+        return -1
       }
     }
   }

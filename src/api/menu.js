@@ -47,9 +47,9 @@ export function createSetMenu(data) {
   })
 }
 
-export function updateSetMenu(id, data) {
+export function updateSetMenu(restId, id, data) {
   return request({
-    url: `/update-restaurant/${id}/set-menu-item`,
+    url: `/update-restaurant/${restId}/set-menu-item/${id}`,
     method: 'post',
     data
   })

@@ -139,14 +139,20 @@
       updateData(form, callback) {
         const data = Object.assign({}, form)
         console.log(data)
-        updateSetMenu(this.restaurantId, data).then(() => {
+        updateSetMenu(this.restaurantId, data.id, data).then(() => {
           callback("修改套餐成功")
           this.getList()
         })
       },
       deleteItem (row) {
         deleteSetMenuItem (row.id, this.restaurantId).then(res => {
-
+          this.$notify({
+            title: '成功',
+            message: '套餐删除成功',
+            type: 'success',
+            duration: 2000
+          })
+          this.getList()
         })
       }
     }
