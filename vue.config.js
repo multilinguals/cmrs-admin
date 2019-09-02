@@ -21,7 +21,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : 'https://multilinguals.github.io/cmrs-clinet-page/page',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : 'https://multilinguals.github.io/cmrs-admin-page/page',
   outputDir: 'dist/page',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
