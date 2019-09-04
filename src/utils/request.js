@@ -76,6 +76,15 @@ service.interceptors.response.use(
     // } else {
     //   return res
     // }
+    let errorCode = response.headers['x-biz-err-code']
+    if(errorCode) {
+      Message({
+        message: res.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
+      return Promise.reject(error)
+    }
     return res
   },
   error => {
